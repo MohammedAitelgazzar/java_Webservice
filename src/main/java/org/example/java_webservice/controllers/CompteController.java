@@ -22,11 +22,11 @@ public class CompteController {
     public ResponseEntity<Compte> getCompteById(@PathVariable Long id){
         return compteRepository.findById(id).map(compte -> ResponseEntity.ok().body(compte)).orElse(ResponseEntity.notFound().build());
     }
-    @PostMapping("/comptes")
+    @PostMapping(value = "/comptes",produces = {"application/json","application/xml"})
     public Compte createCompte(@RequestBody Compte compte){
         return compteRepository.save(compte);
     }
-    @PutMapping("/comptes")
+    @PutMapping(value = "/comptes",produces = {"application/json","application/xml"})
     public ResponseEntity<Compte> updateCompte(@PathVariable Long id, @RequestBody Compte compteDetails){
         return compteRepository.findById(id).map(compte -> {
             compte.setSolde(compteDetails.getSolde());
